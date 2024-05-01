@@ -20,8 +20,11 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->all();
-        $data['body'] = $request->input('body');
+        $data = $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
         $data['author_id'] = 1;
 
         Post::create($data);
@@ -41,9 +44,19 @@ class PostController extends Controller
 
     public function update(Request $request, Post $post)
     {
-        $post->update($request->all());
-        return redirect()->route('posts.index');
-    }
+        $data = $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+        $post->title = $data['title'];
+        $post->body = $data['body'];
+
+        $post->author_id = 1;
+        $post->save();
+
+        return redirect()->route('posts.show', $post->id);
+    }  
 
     public function destroy(Post $post)
     {
