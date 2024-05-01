@@ -13,12 +13,11 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('body');
-            $table->unsignedBigInteger('author_id');
+            $table->unsignedBigInteger('author_id')->default(1);
             $table->timestamps();
         });
     }
 
-    
     public function down(): void
     {
         Schema::dropIfExists('posts');

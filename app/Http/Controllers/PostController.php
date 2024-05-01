@@ -20,10 +20,15 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        Post::create($request->all());
+        $data = $request->all();
+        $data['body'] = $request->input('body');
+        $data['author_id'] = 1;
+
+        Post::create($data);
+
         return redirect()->route('posts.index');
     }
-    
+
     public function edit(Post $post)
     {
         return view('posts.edit', compact('post'));
