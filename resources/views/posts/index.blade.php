@@ -14,8 +14,8 @@
         @isset($posts)
             @foreach ($posts as $post)
                 <li>
-                    <a href="{{ route('posts.edit', $post->id) }}">{{ $post->title }}</a>
-                    <p>{{ $post->body }}</p>
+                    <a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a>
+                    <p>{{ \Illuminate\Support\Str::limit($post->body, 150, $end='...') }}</p> 
 
                     <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
                         @csrf
