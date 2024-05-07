@@ -15,7 +15,10 @@
         
         <label for="title">Título: </label><br>
         <input type="text" id="title" name="title" value="{{ $post->title }}"><br><br>
-    
+        
+        <label for="subtitle">Subtitulo:</label><br>
+        <input type="text" id="subtitle" name="subtitle" value="{{ $subtitle }}"><br><br>
+
         <label for="body">Contenido: </label><br>
         <textarea name="body" id="body" cols="100" rows="20">{{ $post->body }}</textarea><br><br>
         

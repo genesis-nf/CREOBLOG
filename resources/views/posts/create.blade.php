@@ -13,6 +13,9 @@
         <label for="title">Títuloo: </label><br>
         <input type="text" id="title" name="title"><br><br>
     
+        <label for="subtitle">Subtítulo: </label><br>
+        <input type="text" id="subtitle" name="subtitle"><br><br>
+
         <label for="body">Contenido: </label><br>
         <textarea name="body" id="body" cols="100" rows="20"></textarea><br><br>
         

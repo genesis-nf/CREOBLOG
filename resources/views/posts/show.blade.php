@@ -6,10 +6,20 @@
     <title>Ver Post</title>
 </head>
 <body>
+    <nav>
+        <ul>
+            <li><a href="{{ route('posts.index') }}">Inicio</a></li>
+        </ul>
+    </nav>
 
     <h1>{{ $post->title }}</h1>
-    <p>{{ $post->body }}</p>
-    
+
+    @if($post->subtitle)
+    <h2>{{ $post->subtitle }}</h2>
+    @endif
+
+    <p>{!! nl2br(e($post->body)) !!}</p>
+
     <form action="{{ route('posts.edit', $post->id) }}" method="GET">
         @csrf
         <button type="submit">Editar</button>

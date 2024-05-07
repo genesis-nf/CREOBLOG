@@ -22,6 +22,7 @@ class PostController extends Controller
     {
         $data = $request->validate([
             'title' => 'required',
+            'subtitle' => 'nullable',
             'body' => 'required',
         ]);
 
@@ -35,21 +36,23 @@ class PostController extends Controller
     public function show(Post $post)
     {
         return view('posts.show', compact('post'));
-    }
+    }    
 
     public function edit(Post $post)
     {
-        return view('posts.edit', compact('post'));
-    }
+        return view('posts.edit', ['post' => $post, 'subtitle' => $post->subtitle]);
+    }       
 
     public function update(Request $request, Post $post)
     {
         $data = $request->validate([
             'title' => 'required',
+            'subtitle' => 'nullable',
             'body' => 'required',
         ]);
 
         $post->title = $data['title'];
+        $post->subtitle = $data['subtitle'];
         $post->body = $data['body'];
 
         $post->author_id = 1;
