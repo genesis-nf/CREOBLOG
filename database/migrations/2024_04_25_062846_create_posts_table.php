@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('subtitle')->nullable()->default('')->after('title');
+            $table->string('subtitle')->nullable()->default('');
             $table->text('body');
             $table->unsignedBigInteger('author_id')->default(1);
             $table->timestamps();
@@ -20,8 +20,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('subtitle');
-        });
+        Schema::dropIfExists('posts');
     }
 };
+
