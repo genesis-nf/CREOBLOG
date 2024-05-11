@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Postst</title>
-</head>
-<body>
+@extends('layout')
 
-    <form action="{{ route('posts.store') }}" method="POST">
+@section('content')
+
+    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <label for="title">Títuloo: </label><br>
@@ -16,20 +11,14 @@
         <label for="subtitle">Subtítulo: </label><br>
         <input type="text" id="subtitle" name="subtitle"><br><br>
 
+        <label for="image_data">Imagen:</label><br>
+        <input type="file" id="image_data" name="image_data"><br><br>
+
         <label for="body">Contenido: </label><br>
         <textarea name="body" id="body" cols="100" rows="20"></textarea><br><br>
         
         <button type="submit">Publicar</button>
-        <button type="button" onclick="cancelar()">Cancelar</button>
+        <button type="button" onclick="confirmarCancelacion()">Cancelar</button>
 
     </form>
-
-
-    <script>
-        function cancelar() {
-            window.location.href = "{{ route('posts.index') }}";
-        }
-    </script>
-
-</body>
-</html>
+@endsection

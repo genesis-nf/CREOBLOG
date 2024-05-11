@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ver Post</title>
-</head>
-<body>
+@extends('layout')
+
+@section('content')    
     <nav>
         <ul>
             <li><a href="{{ route('posts.index') }}">Inicio</a></li>
@@ -18,6 +13,10 @@
     <h2>{{ $post->subtitle }}</h2>
     @endif
 
+    @if($post->image_data)
+    <img src="{{ asset('storage/' . str_replace('public/', '', $post->image_data)) }}" alt="Imagen del post">
+    @endif
+
     <p>{!! nl2br(e($post->body)) !!}</p>
 
     <form action="{{ route('posts.edit', $post->id) }}" method="GET">
@@ -25,11 +24,9 @@
         <button type="submit">Editar</button>
     </form>
     
-    <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+    <form id="delete-form-{{ $post->id }}" action="{{ route('posts.destroy', $post->id) }}" method="POST">
         @csrf
         @method('DELETE')
-        <button type="submit">Eliminar</button>
+        <button type="button" onclick="confirmarEliminacion({{ $post->id }})">Eliminar</button>
     </form>
-
-</body>
-</html>
+@endsection
